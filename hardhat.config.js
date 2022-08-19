@@ -1,5 +1,7 @@
 require('@nomicfoundation/hardhat-toolbox')
-require("dotenv").config()
+require('dotenv').config()
+require('./tasks/block-number')
+require('hardhat-gas-reporter')
 
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL
 const PRIVATE_KEY = process.env.PRIVATE_KEY
@@ -14,10 +16,18 @@ module.exports = {
       accounts: [PRIVATE_KEY],
       chainId: 4,
     },
+    localhost: {
+      url: 'http://127.0.0.1:8545',
+      //accounts: [PRIVATE_KEY],
+      chainId: 31337,
+    },
   },
   etherscan: {
     // Your API key for Etherscan
     // Obtain one at https://etherscan.io/
-    apiKey: ETHERSCAN_API_KEY
-  }
+    apiKey: ETHERSCAN_API_KEY,
+  },
+  gasReporter: {
+    enabled: true,
+  },
 }
